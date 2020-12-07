@@ -28,7 +28,6 @@ dependencies {
 
 test {
 
-    systemProperty "selenide.fastSetValue","true"
     systemProperty "selenide.timeout","3500"
     systemProperty "chromeoptions.args","--disable-notifications"
     systemProperty "chromeoptions.prefs","intl.accept_languages=es"
