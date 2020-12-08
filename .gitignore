@@ -5,3 +5,4 @@ build
 video
 out
 allure-results
+src/test/java/project/Password.java

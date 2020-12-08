@@ -19,20 +19,25 @@ targetCompatibility = 1.8
 
 dependencies {
     testImplementation("com.codeborne:selenide:5.11.1")
-    testImplementation("io.qameta.allure:allure-selenide:2.13.3")
+    testImplementation("io.qameta.allure:allure-selenide:2.13.6")
     testImplementation("org.slf4j:slf4j-simple:1.7.29")
     // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+
+    compile("com.codeborne:selenide:5.11.1")
+    compile("io.qameta.allure:allure-selenide:2.13.6")
+
+    compile("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    compile("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    compile("org.junit.jupiter:junit-jupiter-params:5.7.0")
 }
 
 test {
-
     systemProperty "selenide.timeout","3500"
     systemProperty "chromeoptions.args","--disable-notifications"
     systemProperty "chromeoptions.prefs","intl.accept_languages=es"
     useJUnitPlatform()
-
     testLogging {
         // set options for log level LIFECYCLE
         events "failed",
@@ -48,9 +53,9 @@ test {
 }
 allure {
     autoconfigure = true
-    version = "2.13.3"
+    version = "2.13.6"
 
     useJUnit5 {
-        version = "2.13.3"
+        version = "2.13.6"
     }
 }
