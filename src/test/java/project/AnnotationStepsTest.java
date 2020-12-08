@@ -4,33 +4,75 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selectors;
 import io.qameta.allure.*;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static helpers.AttachmentsHelper.*;
 
 public class AnnotationStepsTest {
 
     @BeforeEach
-    void setup(){
+    public void setup() {
+        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+
+        Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "https://user1:1234@" + System.getProperty("remote.browser.url") + ":4444/wd/hub/";
         Configuration.startMaximized = true;
     }
 
+    @AfterEach
+    @Step("Attachments")
+    public void afterEach() {
+        attachScreenshot("Last screenshot");
+        attachPageSource();
+        attachAsText("Browser console logs", getConsoleLogs());
+        attachVideo();
+        closeWebDriver();
+    }
+
     @Test
-    @DisplayName("Аннотированный тест")
+    @DisplayName("Аннотированный позитивный тест")
     @Feature("Issues")
-    @Story("Юзер оздает ишью с тэгом")
+    @Story("Юзер создает ишью с тэгом")
     @Link(url = "https://testing.github.com", name = "Тестинг")
     @Owner("Dmitry Potapov")
     @Severity(SeverityLevel.CRITICAL)
-    void annotationStepsSelenideTest() {
+    void annotationPositiveStepsSelenideTest() {
         final BaseSteps steps = new BaseSteps();
         int randomNum = new Random().nextInt();
         steps.openGitHub();
-        steps.createIssue(randomNum);
+        steps.loginToGitHub();
+        steps.createValidIssue(randomNum);
+        steps.checkIssue(randomNum);
+        steps.cleanAfterTest();
+    }
+
+    @Test
+    @DisplayName("Аннотированный негативный тест")
+    @Feature("Issues")
+    @Story("Юзер создает ишью с тэгом")
+    @Link(url = "https://testing.github.com", name = "Тестинг")
+    @Owner("Bill Gates")
+    @Severity(SeverityLevel.BLOCKER)
+    void annotationNegativeStepsSelenideTest() {
+        final BaseSteps steps = new BaseSteps();
+        int randomNum = new Random().nextInt();
+        steps.openGitHub();
+        steps.loginToGitHub();
+        steps.createInValidIssue(randomNum);
         steps.checkIssue(randomNum);
         steps.cleanAfterTest();
     }
@@ -41,12 +83,16 @@ public class AnnotationStepsTest {
             open("https://github.com/");
         }
 
-        @Step("Создаем ишью")
-        public void createIssue(int randomNum) {
+        @Step("Логинимся")
+        public void loginToGitHub() {
             $(Selectors.byText("Sign in")).click();
             $x("//input[@name='login']").val(Password.username);
             $x("//input[@name='password']").val(Password.password);
             $x("//input[@value='Sign in']").click();
+        }
+
+        @Step("Создаем валидное ишью")
+        public void createValidIssue(int randomNum) {
             $(Selectors.withText("adept7771/qaguru-course")).click();
             $x("//span[@data-content='Issues']").click();
             $x("//span[text()='New issue']").click();
@@ -58,6 +104,13 @@ public class AnnotationStepsTest {
 
             $(Selectors.byText("Submit new issue")).click();
         }
+
+        @Step("Шаг падения теста на локаторе")
+        public void createInValidIssue(int randomNum) {
+            $(Selectors.withText("adept7771/qaguru-course")).click();
+            $x("invalid_locator").click();
+        }
+
 
         @Step("Проверяем ишью")
         public void checkIssue(int randomNum) {

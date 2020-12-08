@@ -1,6 +1,9 @@
 .idea
 .gradle
 .allure
+/gradlew
+/gradlew.bat
+.todo
 build
 video
 out
