@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SelenideTest {
+public class RegistrationFormTests {
 
     String firstName = "firstName";
     String lastName = "lastName";
@@ -28,7 +28,7 @@ public class SelenideTest {
     }
 
     @Test
-    void demoQaTest() {
+    void checkAllFormsFieldsTest() {
         open("https://demoqa.com/automation-practice-form");
         $x("//input[@id='firstName']").setValue(firstName);
         $x("//input[@id='lastName']").setValue(lastName);
