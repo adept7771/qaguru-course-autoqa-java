@@ -51,7 +51,7 @@ public class LambdaStepsTest {
             $(Selectors.byText("Submit new issue")).click();
         });
 
-        step("Проверяем ишью", () -> {
+        step("Проверяем ишью", (step) -> {
             $x("//span[@data-content='Issues']").click();
             $$x("//a[@data-hovercard-type='issue']")
                     .find(Condition.text("Issue number " + randomNum)).click();
@@ -63,11 +63,14 @@ public class LambdaStepsTest {
                     .find(Condition.text("bug")).shouldBe(Condition.appear);
         });
 
-        step("Очистка после теста", () -> {
+        step("Очистка после теста", (step) -> {
             $x("//span[@data-content='Issues']").click();
             $x("//input[@aria-label=\"Select all issues\"]").click();
-            $x("//summary[@class=\"btn-link select-menu-button\" and contains(text(), 'Mark as')]").click();
+            $x("//summary[@class=\"btn-link select-menu-button\" and contains(text(), 'Mark as')]")
+                    .click();
             $x("//div[@class=\"select-menu-item-text\" and text()='Closed']").click();
+            $x("//div[@class=\"select-menu-item-text\" and text()='Closed']")
+                    .shouldNotBe(Condition.appears);
         });
     }
 }
