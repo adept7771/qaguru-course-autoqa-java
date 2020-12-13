@@ -54,10 +54,7 @@ public class AnnotationStepsTest {
         final BaseSteps steps = new BaseSteps();
         int randomNum = new Random().nextInt();
         steps.openGitHub();
-        steps.loginToGitHub();
-        steps.createValidIssue(randomNum);
-        steps.checkIssue(randomNum);
-        steps.cleanAfterTest();
+        steps.checkGitHubInterfaceExistencePositive();
     }
 
     @Test
@@ -71,10 +68,7 @@ public class AnnotationStepsTest {
         final BaseSteps steps = new BaseSteps();
         int randomNum = new Random().nextInt();
         steps.openGitHub();
-        steps.loginToGitHub();
-        steps.createInValidIssue(randomNum);
-        steps.checkIssue(randomNum);
-        steps.cleanAfterTest();
+        steps.checkGitHubInterfaceExistenceNegative();
     }
 
     public static class BaseSteps {
@@ -83,54 +77,16 @@ public class AnnotationStepsTest {
             open("https://github.com/");
         }
 
-        @Step("Логинимся")
-        public void loginToGitHub() {
-            $(Selectors.byText("Sign in")).click();
-            $x("//input[@name='login']").val(Password.username);
-            $x("//input[@name='password']").val(Password.password);
-            $x("//input[@value='Sign in']").click();
+        @Step("Проверяем наличие управляющих кнопок на странице (позитивное)")
+        public void checkGitHubInterfaceExistencePositive() {
+            $(Selectors.byText("Sign in")).shouldBe(Condition.appears);
+            $x("//input[@name='user_email']").shouldBe(Condition.appears);
         }
 
-        @Step("Создаем валидное ишью")
-        public void createValidIssue(int randomNum) {
-            $(Selectors.withText("adept7771/qaguru-course")).click();
-            $x("//span[@data-content='Issues']").click();
-            $x("//span[text()='New issue']").click();
-            $x("//input[@name='issue[title]']").val("Issue number " + randomNum);
-            $x("//textarea[@name='issue[body]']").val("Issue description for " + randomNum);
-            $x("//summary[@data-hotkey=\"l\"]").click();
-            $x("//span[@class=\"name\" and text()='bug']").click();
-            $x("//summary[@data-hotkey=\"l\"]").click();
-
-            $(Selectors.byText("Submit new issue")).click();
-        }
-
-        @Step("Шаг падения теста на локаторе")
-        public void createInValidIssue(int randomNum) {
-            $(Selectors.withText("adept7771/qaguru-course")).click();
-            $x("invalid_locator").click();
-        }
-
-
-        @Step("Проверяем ишью")
-        public void checkIssue(int randomNum) {
-            $x("//span[@data-content='Issues']").click();
-            $$x("//a[@data-hovercard-type='issue']")
-                    .find(Condition.text("Issue number " + randomNum)).click();
-            $x("//span[@class=\"js-issue-title\"]")
-                    .shouldHave(Condition.text("Issue number " + randomNum));
-            $x("//a[@class=\"author text-bold link-gray\"]")
-                    .shouldHave(Condition.text(Password.username));
-            $$x("//div[@class='js-issue-labels labels css-truncate']")
-                    .find(Condition.text("bug")).shouldBe(Condition.appear);
-        }
-
-        @Step("Очищаем репозиторий поле теста")
-        public void cleanAfterTest() {
-            $x("//span[@data-content='Issues']").click();
-            $x("//input[@aria-label=\"Select all issues\"]").click();
-            $x("//summary[@class=\"btn-link select-menu-button\" and contains(text(), 'Mark as')]").click();
-            $x("//div[@class=\"select-menu-item-text\" and text()='Closed']").click();
+        @Step("Проверяем наличие управляющих кнопок на странице (негативное)")
+        public void checkGitHubInterfaceExistenceNegative() {
+            $(Selectors.byText("Sign in")).shouldBe(Condition.appears);
+            $x("//input[@name='user_email_wrong']").shouldBe(Condition.appears);
         }
     }
 }
