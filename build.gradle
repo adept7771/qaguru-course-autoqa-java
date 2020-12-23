@@ -41,7 +41,7 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
-    systemProperties = System.properties
+    systemProperty "env","localweb"
 }
 
 test {

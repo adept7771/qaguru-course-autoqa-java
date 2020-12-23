@@ -1,15 +1,13 @@
 package project.configs;
 
 import com.codeborne.selenide.Configuration;
-import org.aeonbits.owner.Config;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-@Config.Sources("system:properties")
-public class SelenideConfiguratorTest {
+public class SelenideConfigurator {
 
     @BeforeAll
     static void setup() {
@@ -20,7 +18,7 @@ public class SelenideConfiguratorTest {
         Configuration.browserVersion = selenideConfig.browserVersion();
         Configuration.baseUrl = selenideConfig.baseUrl();
 
-        if (selenideConfig.useSelenoid()) {
+        if (selenideConfig.selenideRemote()) {
             Configuration.remote = selenideConfig.webDriverRemoteURL();
         }
 
