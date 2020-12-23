@@ -16,7 +16,6 @@ public class SelenideConfigurator {
 
         Configuration.browser = selenideConfig.browserName();
         Configuration.browserVersion = selenideConfig.browserVersion();
-        Configuration.baseUrl = selenideConfig.baseUrl();
 
         if (selenideConfig.selenideRemote()) {
             Configuration.remote = selenideConfig.webDriverRemoteURL();
