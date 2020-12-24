@@ -7,7 +7,7 @@ import project.configs.SelenideConfigurator;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
-public class webTest extends SelenideConfigurator {
+public class WebTest extends SelenideConfigurator {
 
     @Test
     void checkSteamInterface() {
