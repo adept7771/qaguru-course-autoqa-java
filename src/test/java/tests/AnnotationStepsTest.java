@@ -1,54 +1,26 @@
-package project;
+package tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selectors;
+import helpers.ServiceRunner;
 import io.qameta.allure.*;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
-import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
-import static helpers.AttachmentsHelper.*;
 
-public class AnnotationStepsTest {
+public class AnnotationStepsTest extends ServiceRunner {
 
-    @BeforeEach
-    public void setup() {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-
-        Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@" + System.getProperty("remote.browser.url") + ":4444/wd/hub/";
-        Configuration.startMaximized = true;
-    }
-
-    @AfterEach
-    @Step("Attachments")
-    public void afterEach() {
-        attachScreenshot("Last screenshot");
-        attachPageSource();
-        attachAsText("Browser console logs", getConsoleLogs());
-        attachVideo();
-        closeWebDriver();
-    }
+    final String owner = "Dmitry Potapov";
 
     @Test
     @DisplayName("Аннотированный позитивный тест")
     @Feature("Issues")
     @Story("Юзер создает ишью с тэгом")
     @Link(url = "https://testing.github.com", name = "Тестинг")
-    @Owner("Dmitry Potapov")
+    @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void annotationPositiveStepsSelenideTest() {
         final BaseSteps steps = new BaseSteps();
@@ -62,7 +34,7 @@ public class AnnotationStepsTest {
     @Feature("Issues")
     @Story("Юзер создает ишью с тэгом")
     @Link(url = "https://testing.github.com", name = "Тестинг")
-    @Owner("Bill Gates")
+    @Owner(owner)
     @Severity(SeverityLevel.BLOCKER)
     void annotationNegativeStepsSelenideTest() {
         final BaseSteps steps = new BaseSteps();
