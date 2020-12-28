@@ -4,17 +4,15 @@ import helpers.ServiceRunner;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import project.steps.AuthorisationSteps;
 import project.steps.CartSteps;
 import project.steps.NavigationSteps;
 import project.steps.SearchSteps;
 
-public class AnnotationStepsTest extends ServiceRunner {
+public class OzonTests extends ServiceRunner {
 
     final String owner = "Dmitry Potapov";
     final String url = "https://ozon.ru/";
-    final NavigationSteps navigationSteps = new NavigationSteps();
-    final SearchSteps searchSteps = new SearchSteps();
-    final CartSteps cartSteps = new CartSteps();
 
     @Test
     @DisplayName("Проверить переход в категорию смартфоны")
@@ -57,8 +55,13 @@ public class AnnotationStepsTest extends ServiceRunner {
         cartSteps.checkCartIcon("1");
     }
 
+    final NavigationSteps navigationSteps = new NavigationSteps();
+    final SearchSteps searchSteps = new SearchSteps();
+    final CartSteps cartSteps = new CartSteps();
+    final AuthorisationSteps authorisationSteps = new AuthorisationSteps();
+
     @Test
-    @DisplayName("Все городда в выпадающем списке уникальны")
+    @DisplayName("Все города в выпадающем списке уникальны")
     @Feature("Issues")
     @Story("Навигация по магазину")
     @Link(url = url, name = "Проверка функциональности магазина")
@@ -68,5 +71,18 @@ public class AnnotationStepsTest extends ServiceRunner {
         navigationSteps.openStartPage();
         navigationSteps.citiesChangeMenuEnter();
         navigationSteps.citiesMenuUniqueCheck();
+    }
+
+    @Test
+    @DisplayName("Только авторизированный пользователь может ввести промокод")
+    @Feature("Issues")
+    @Story("Работа промокодов")
+    @Link(url = url, name = "Проверка функциональности магазина")
+    @Owner(owner)
+    @Severity(SeverityLevel.CRITICAL)
+    void onlyAuthorisedUsersUsePromoTest() {
+        navigationSteps.openStartPage();
+        navigationSteps.enterPromoCode("testCode");
+        authorisationSteps.needAuthorisationNotification();
     }
 }

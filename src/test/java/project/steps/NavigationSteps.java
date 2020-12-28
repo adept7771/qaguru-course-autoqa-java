@@ -54,5 +54,10 @@ public class NavigationSteps {
         Assertions.assertTrue(true);
     }
 
-
+    @Step("Ввод промокода")
+    public void enterPromoCode(String promoCode) {
+        $x("//p[contains(text(), 'Введите промокод')]/parent::div/input")
+                .val(promoCode);
+        $x("(//div[@class='ui-k4']//button[@class='ui-k6'])[2]").click();
+    }
 }
