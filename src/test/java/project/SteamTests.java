@@ -2,6 +2,7 @@ package project;
 
 import helpers.ServiceRunner;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import project.steps.AuthorisationSteps;
@@ -85,5 +86,16 @@ public class SteamTests extends ServiceRunner {
         authorisationSteps.goToLoginPage();
         authorisationSteps.loginWithData("wrong_login", "wrong_password");
         authorisationSteps.checkWrongCredsNotification();
+    }
+
+    @Test
+    @DisplayName("Тест, который всегда падает")
+    @Feature("Issues")
+    @Story("Работа логина")
+    @Link(url = url, name = "Проверка функциональности магазина")
+    @Owner(owner)
+    @Severity(SeverityLevel.CRITICAL)
+    void alwaysFallTest() {
+        Assertions.fail("Этот тест всегда падает и должен просто существовать в отчете.");
     }
 }
