@@ -28,7 +28,7 @@ public class NavigationSteps {
     }
 
     @Step("Переход в меню выбора языка")
-    public void languagesChangeLanguageMenuEnter() {
+    public void languagesMenuEnter() {
         $x("//span[@id='language_pulldown']").click();
     }
 

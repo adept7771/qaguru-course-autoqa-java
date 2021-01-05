@@ -54,7 +54,7 @@ public class SteamTests extends ServiceRunner {
     @Severity(SeverityLevel.CRITICAL)
     void checkAllLanguagesIsUniqueTest() {
         navigationSteps.openStartPage();
-        navigationSteps.languagesChangeLanguageMenuEnter();
+        navigationSteps.languagesMenuEnter();
         navigationSteps.languageMenuUniqueCheck();
     }
 
@@ -74,7 +74,7 @@ public class SteamTests extends ServiceRunner {
     }
 
     @Test
-    @DisplayName("Только авторизированный пользователь может ввести промокод")
+    @DisplayName("Вход с не корректными регистрационными данными")
     @Feature("Issues")
     @Story("Работа логина")
     @Link(url = url, name = "Проверка функциональности магазина")
@@ -82,7 +82,8 @@ public class SteamTests extends ServiceRunner {
     @Severity(SeverityLevel.CRITICAL)
     void incorrectSignInTest() {
         navigationSteps.openStartPage();
-
-        authorisationSteps.needAuthorisationNotification();
+        authorisationSteps.goToLoginPage();
+        authorisationSteps.loginWithData("wrong_login", "wrong_password");
+        authorisationSteps.checkWrongCredsNotification();
     }
 }
