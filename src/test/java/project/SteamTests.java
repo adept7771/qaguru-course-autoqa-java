@@ -59,7 +59,7 @@ public class SteamTests extends ServiceRunner {
     }
 
     @Test
-    @DisplayName("Счетчик товваров в корзине изменяется")
+    @DisplayName("Счетчик товаров в корзине изменяется")
     @Feature("Issues")
     @Story("Проверка корзины")
     @Link(url = url, name = "Проверка функциональности магазина")

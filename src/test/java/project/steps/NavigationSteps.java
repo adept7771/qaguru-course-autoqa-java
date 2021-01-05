@@ -38,7 +38,6 @@ public class NavigationSteps {
         ElementsCollection elementsCollection = $$x("//a[@class='popup_menu_item tight']");
         ArrayList<String> elementsTexts = new ArrayList<>();
         for (SelenideElement element : elementsCollection) {
-            System.out.println("Element text: " + element.getText());
             elementsTexts.add(element.getText());
         }
         for (int i = 0; i < elementsTexts.size(); i++) {
