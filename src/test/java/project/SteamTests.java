@@ -9,23 +9,26 @@ import project.steps.CartSteps;
 import project.steps.NavigationSteps;
 import project.steps.SearchSteps;
 
-public class OzonTests extends ServiceRunner {
+public class SteamTests extends ServiceRunner {
 
     final String owner = "Dmitry Potapov";
-    final String url = "https://ozon.ru/";
+    final String url = "https://store.steampowered.com/";
+    final NavigationSteps navigationSteps = new NavigationSteps();
+    final SearchSteps searchSteps = new SearchSteps();
+    final CartSteps cartSteps = new CartSteps();
+    final AuthorisationSteps authorisationSteps = new AuthorisationSteps();
 
     @Test
-    @DisplayName("Проверить переход в категорию смартфоны")
+    @DisplayName("Проверить, что стим может быть установлен")
     @Feature("Issues")
     @Story("Навигация по магазину")
     @Link(url = url, name = "Проверка функциональности магазина")
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
-    void checkSmartphonesCatalogueTest() {
+    void steamCanBeInstalledTest() {
         navigationSteps.openStartPage();
-        navigationSteps.openCatalogue();
-        navigationSteps.goToSmartphones();
-        navigationSteps.checkH1Smartphones();
+        navigationSteps.installSteam();
+        navigationSteps.checkSteamCanBeInstalled();
     }
 
     @Test
@@ -35,54 +38,51 @@ public class OzonTests extends ServiceRunner {
     @Link(url = url, name = "Проверка функциональности магазина")
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
-    void searchTextTest() {
+    void searchGameTest() {
         navigationSteps.openStartPage();
-        String phoneName = "iPhone";
-        searchSteps.searchInSearchInput(phoneName);
-        searchSteps.checkSearchResultsForOneMatch(phoneName);
+        String gameName = "Bannerlord";
+        searchSteps.searchInSearchInput(gameName);
+        searchSteps.checkSearchResultsForOneMatch(gameName);
     }
 
     @Test
-    @DisplayName("При добавлении товара - корзина становится равна 1")
-    @Feature("Issues")
-    @Story("Работа корзины")
-    @Link(url = url, name = "Проверка функциональности магазина")
-    @Owner(owner)
-    @Severity(SeverityLevel.CRITICAL)
-    void checkCartIconTest() {
-        navigationSteps.openStartPage();
-        cartSteps.addFirstItemToCart();
-        cartSteps.checkCartIcon("1");
-    }
-
-    final NavigationSteps navigationSteps = new NavigationSteps();
-    final SearchSteps searchSteps = new SearchSteps();
-    final CartSteps cartSteps = new CartSteps();
-    final AuthorisationSteps authorisationSteps = new AuthorisationSteps();
-
-    @Test
-    @DisplayName("Все города в выпадающем списке уникальны")
+    @DisplayName("Все языки в выпадающем списке уникальны")
     @Feature("Issues")
     @Story("Навигация по магазину")
     @Link(url = url, name = "Проверка функциональности магазина")
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
-    void checkAllCitiesIsUnique() {
+    void checkAllLanguagesIsUniqueTest() {
         navigationSteps.openStartPage();
-        navigationSteps.citiesChangeMenuEnter();
-        navigationSteps.citiesMenuUniqueCheck();
+        navigationSteps.languagesChangeLanguageMenuEnter();
+        navigationSteps.languageMenuUniqueCheck();
+    }
+
+    @Test
+    @DisplayName("Счетчик товваров в корзине изменяется")
+    @Feature("Issues")
+    @Story("Проверка корзины")
+    @Link(url = url, name = "Проверка функциональности магазина")
+    @Owner(owner)
+    @Severity(SeverityLevel.CRITICAL)
+    void checkCartCounterTest() {
+        navigationSteps.openStartPage();
+        String gameName = "Bannerlord";
+        searchSteps.searchInSearchInput(gameName);
+        cartSteps.addFirstItemToCart();
+        cartSteps.checkCartIcon("1");
     }
 
     @Test
     @DisplayName("Только авторизированный пользователь может ввести промокод")
     @Feature("Issues")
-    @Story("Работа промокодов")
+    @Story("Работа логина")
     @Link(url = url, name = "Проверка функциональности магазина")
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
-    void onlyAuthorisedUsersUsePromoTest() {
+    void incorrectSignInTest() {
         navigationSteps.openStartPage();
-        navigationSteps.enterPromoCode("testCode");
+
         authorisationSteps.needAuthorisationNotification();
     }
 }

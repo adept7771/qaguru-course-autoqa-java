@@ -6,58 +6,53 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class NavigationSteps {
 
-    @Step("Открываем главную страницу озона")
+    @Step("Открываем главную страницу стима")
     public void openStartPage() {
-        open("https://ozon.ru/");
+        open("https://store.steampowered.com/");
     }
 
-    @Step("Открыть каталог")
-    public void openCatalogue() {
-        $x("//div[@class='ui-n1' and text()='Каталог']").click();
+    @Step("Перейти в Установить Steam")
+    public void installSteam() {
+        $x("//a[contains(text(), 'Install Steam')]").click();
     }
 
-    @Step("Перейти в категорию Смартфоны")
-    public void goToSmartphones() {
-        $x("//a[contains(@href, 'smartfony')]").click();
+    @Step("Проверка, что ссылка на скачивание клиента присутсвует на странице")
+    public void checkSteamCanBeInstalled() {
+        $x("//a[@class=\"about_install_steam_link\"]").shouldBe(Condition.appears);
     }
 
-    @Step("Должен загрузиться заголовок Смартфоны")
-    public void checkH1Smartphones() {
-        $x("//h1[contains(text(), 'Смартфоны')]").shouldBe(Condition.visible);
+    @Step("Переход в меню выбора языка")
+    public void languagesChangeLanguageMenuEnter() {
+        $x("//span[@id='language_pulldown']").click();
     }
 
-    @Step("Переход в меню выбора города")
-    public void citiesChangeMenuEnter() {
-        $x("(//div[@class='ui-n1'])[1]").click();
-    }
-
-    @Step("Проверка, что все города в списке уникальны")
-    public void citiesMenuUniqueCheck() {
-        $x("(//a[@class='a7'])[1]").shouldBe(Condition.visible);
-        ElementsCollection elementsCollection = $$x("//a[@class='a7']");
-        for (int i = 0; i < elementsCollection.size(); i++) {
+    @Step("Проверка, что все языки в списке уникальны")
+    public void languageMenuUniqueCheck() {
+        $x("//a[@class='popup_menu_item tight']").shouldBe(Condition.visible);
+        ElementsCollection elementsCollection = $$x("//a[@class='popup_menu_item tight']");
+        ArrayList<String> elementsTexts = new ArrayList<>();
+        for (SelenideElement element : elementsCollection) {
+            System.out.println("Element text: " + element.getText());
+            elementsTexts.add(element.getText());
+        }
+        for (int i = 0; i < elementsTexts.size(); i++) {
             int matches = 0;
-            SelenideElement currentElement = elementsCollection.get(0);
-            for (SelenideElement tmpElement : elementsCollection) {
-                if (tmpElement.getText().equals(currentElement.getText())) {
+            String currentText = elementsTexts.get(0);
+            for (String tmpText : elementsTexts) {
+                if (tmpText.equals(currentText)) {
                     matches += 1;
                 }
                 if (matches > 1) {
-                    Assertions.fail("Город " + currentElement.getText() + " повторяется в списке более 1 раза");
+                    Assertions.fail("Язык " + currentText + " повторяется в списке более 1 раза");
                 }
             }
         }
         Assertions.assertTrue(true);
-    }
-
-    @Step("Ввод промокода")
-    public void enterPromoCode(String promoCode) {
-        $x("//p[contains(text(), 'Введите промокод')]/parent::div/input")
-                .val(promoCode);
-        $x("(//div[@class='ui-k4']//button[@class='ui-k6'])[2]").click();
     }
 }
