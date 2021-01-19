@@ -11,21 +11,21 @@ public class ApiTests {
     @Test
     public void getUsersTest() {
         Response response = apiHelper.getListOfUsersByPageNum(1);
-        Assertions.assertEquals(String.valueOf(response.statusCode()), "200");
+        Assertions.assertEquals("200", String.valueOf(response.statusCode()));
         Assertions.assertTrue(response.body().asString().contains("\"page\":1"));
     }
 
     @Test
     public void singleUserNotFoundTest() {
         Assertions.assertEquals(
-                String.valueOf(apiHelper.getSingleUserByNum(500).statusCode()), "404");
+                "404", String.valueOf(apiHelper.getSingleUserByNum(500).statusCode()));
     }
 
     @Test
     public void registerUserTest() {
         String userName = "testUserName", userJob = "testUserJob";
         Response response = apiHelper.createUser(userName, userJob);
-        Assertions.assertEquals(response.statusCode(), 201);
+        Assertions.assertEquals(201, response.statusCode());
         Assertions.assertTrue(response.asString().contains(userName));
         Assertions.assertTrue(response.asString().contains(userJob));
     }
@@ -35,16 +35,16 @@ public class ApiTests {
         String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
         String updatedName = "updatedName", updatedJob = "updatedJob";
         Response response = apiHelper.updateUser(updatedName, updatedJob, userId);
-        Assertions.assertEquals(response.statusCode(), 201);
+        Assertions.assertEquals(201, response.statusCode());
         Assertions.assertTrue(response.asString().contains(updatedName));
         Assertions.assertTrue(response.asString().contains(updatedJob));
     }
 
-//    @Test
-//    public void deleteUserTest(){
-//        String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
-//
-//
-//
-//    }
+    @Test
+    public void deleteUserTest() {
+        String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
+        Assertions.assertEquals(204, apiHelper.deleteUser(userId).getStatusCode());
+        Assertions.assertEquals(
+                "404", String.valueOf(apiHelper.getSingleUserByNum(500).statusCode()));
+    }
 }

@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 public class ApiHelper {
 
     private final String baseUrl = "https://reqres.in",
-            createUserUrl = "/api/users",
+            singleUserUrl = "/api/users",
             getAllUsersUrl = "/api/users?page=";
 
     RequestSpecification spec;
@@ -35,7 +35,7 @@ public class ApiHelper {
                 .with()
                 .when()
                 .log().all()
-                .get(createUserUrl + "/" + userId);
+                .get(singleUserUrl + "/" + userId);
     }
 
     public Response createUser(String name, String job) {
@@ -49,7 +49,7 @@ public class ApiHelper {
                 .body(requestBody)
                 .when()
                 .log().all()
-                .post(createUserUrl)
+                .post(singleUserUrl)
                 ;
     }
 
@@ -64,18 +64,17 @@ public class ApiHelper {
                 .body(requestBody)
                 .when()
                 .log().all()
-                .post(createUserUrl + "/" + userId)
+                .post(singleUserUrl + "/" + userId)
                 ;
     }
 
-//    public Response deleteUser(String userId){
-//        return given()
-//                .spec(spec)
-//                .with()
-//                .body(requestBody)
-//                .when()
-//                .log().all()
-//                .delete()
-//                ;
-//    }
+    public Response deleteUser(String userId) {
+        return given()
+                .spec(spec)
+                .with()
+                .when()
+                .log().all()
+                .delete(singleUserUrl + "/" + userId)
+                ;
+    }
 }
