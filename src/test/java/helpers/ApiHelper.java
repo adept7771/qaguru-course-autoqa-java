@@ -39,33 +39,25 @@ public class ApiHelper {
     }
 
     public Response createUser(String name, String job) {
-        String requestBody = "{\n" +
-                "\"name\": \"" + name + "\",\n" +
-                "\"job\": \"" + job + "\"" +
-                "\n}";
+        String requestBody = "{\n" + "\"name\": \"" + name + "\",\n" + "\"job\": \"" + job + "\"" + "\n}";
         return given()
                 .spec(spec)
                 .with()
                 .body(requestBody)
                 .when()
                 .log().all()
-                .post(singleUserUrl)
-                ;
+                .post(singleUserUrl);
     }
 
     public Response updateUser(String name, String job, String userId) {
-        String requestBody = "{\n" +
-                "\"name\": \"" + name + "\",\n" +
-                "\"job\": \"" + job + "\"" +
-                "\n}";
+        String requestBody = "{\n" + "\"name\": \"" + name + "\",\n" + "\"job\": \"" + job + "\"" + "\n}";
         return given()
                 .spec(spec)
                 .with()
                 .body(requestBody)
                 .when()
                 .log().all()
-                .post(singleUserUrl + "/" + userId)
-                ;
+                .post(singleUserUrl + "/" + userId);
     }
 
     public Response deleteUser(String userId) {
@@ -74,7 +66,6 @@ public class ApiHelper {
                 .with()
                 .when()
                 .log().all()
-                .delete(singleUserUrl + "/" + userId)
-                ;
+                .delete(singleUserUrl + "/" + userId);
     }
 }
