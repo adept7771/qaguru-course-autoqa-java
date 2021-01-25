@@ -1,9 +1,15 @@
 package helpers;
 
+import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import template.ReportTemplate;
 
+import java.util.Collections;
+
+import static filter.CustomFilter.CUSTOM_ALLURE_REST;
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
@@ -14,10 +20,17 @@ public class ApiHelper {
 
     RequestSpecification spec;
 
-    public ApiHelper() {
-        spec = given()
-                .contentType(ContentType.JSON)
-                .baseUri(baseUrl);
+    public ApiHelper(boolean enableFilter) {
+        if (true) {
+            spec = given()
+                    .contentType(ContentType.JSON)
+                    .baseUri(baseUrl)
+                    .filter(ReportTemplate.customTemplates());
+        } else {
+            spec = given()
+                    .contentType(ContentType.JSON)
+                    .baseUri(baseUrl);
+        }
     }
 
     public Response getListOfUsersByPageNum(int pageNum) {

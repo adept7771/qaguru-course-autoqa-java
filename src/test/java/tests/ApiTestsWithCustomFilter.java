@@ -1,12 +1,17 @@
 package tests;
 
 import helpers.ApiHelper;
+import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class ApiTests {
-    ApiHelper apiHelper = new ApiHelper();
+import java.util.Collections;
+
+public class ApiTestsWithCustomFilter {
+    ApiHelper apiHelper = new ApiHelper(true);
 
     @Test
     public void getUsersTest() {

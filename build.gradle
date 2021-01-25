@@ -7,26 +7,42 @@ buildscript {
 plugins {
     id 'java-library'
     id 'application'
+    id 'io.qameta.allure' version '2.8.1'
 }
 
 repositories {
     mavenCentral()
 }
 
-ext {
-    junitVersion = "5.7.0"
-}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
-    testImplementation "io.rest-assured:rest-assured:4.2.0"
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.11.2"
-
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testCompile(
+            //client
+            "io.rest-assured:rest-assured:4.2.0",
+            //json
+            "com.fasterxml.jackson.core:jackson-databind:2.11.2",
+            //report
+            "io.qameta.allure:allure-rest-assured:2.13.5",
+            //JUnit
+            "org.junit.jupiter:junit-jupiter-api:5.6.2",
+            "org.junit.jupiter:junit-jupiter-engine:5.6.2",
+            "org.junit.jupiter:junit-jupiter-params:5.6.2"
+    )
 }
 
-tasks.withType(JavaCompile) {
+compileTestJava {
     options.encoding = 'UTF-8'
+}
+
+allure {
+    autoconfigure = true
+    version = '2.13.5'
+
+    useJUnit5() {
+        version = '2.13.5'
+    }
 }
 
 test {
