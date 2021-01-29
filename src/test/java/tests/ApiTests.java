@@ -17,16 +17,17 @@ public class ApiTests {
     public void addToWishListTest() {
         Selenide.open("http://demowebshop.tricentis.com");
         // вытаскиваем куку из селенида, проверяя что вишлист = 0
-        apiHelper.saveAuthorisationCookieFromSet(WebDriverRunner.getWebDriver().manage().getCookies());
-        Assertions.assertEquals("(0)",
-                Selenide.$x("//span[@class='wishlist-qty']").getText());
+        Set<Cookie> cookies = WebDriverRunner.getWebDriver().manage().getCookies();
+        apiHelper.saveAuthorisationCookieFromSet(cookies);
+        String text = Selenide.$x("//span[@class='wishlist-qty']").getText();
+        Assertions.assertEquals("(0)",text);
         // трижды добавляем через апи с перехваченной кукой итем в вишлист
         apiHelper.addItemToWishList();
         apiHelper.addItemToWishList();
         apiHelper.addItemToWishList();
         Selenide.refresh();
         // проверяем, что в вишлисте стало 3 товара через счетчик
-        Assertions.assertEquals("(3)",
-                Selenide.$x("//span[@class='wishlist-qty']").getText());
+        text = Selenide.$x("//span[@class='wishlist-qty']").getText();
+        Assertions.assertEquals("(3)",text);
     }
 }

@@ -12,7 +12,6 @@ import static io.restassured.RestAssured.given;
 public class ApiHelper {
 
     public String baseUrl = "http://demowebshop.tricentis.com",
-            wishListUrl = "/wishlist",
             addToWishlist = "/addproducttocart/details/53/2",
             bodyForAddToWishList = "addtocart_53.EnteredQuantity=1";
 
@@ -31,27 +30,18 @@ public class ApiHelper {
         for (Cookie cookie : cookiesSet) {
             if (cookie.getName().contains("Nop.customer")) {
                 String name = cookie.getName();
-                apiCookie += name += "=";
                 String value = cookie.getValue();
+                apiCookie += name += "=";
                 apiCookie += value += "; ";
             }
             if (cookie.getName().contains("ARRAffinity")) {
                 String name = cookie.getName();
-                apiCookie += name += "=";
                 String value = cookie.getValue();
+                apiCookie += name += "=";
                 apiCookie += value += ";";
             }
         }
         spec.cookie(apiCookie);
-    }
-
-    public Response getWishListEntities() {
-        return given()
-                .spec(spec)
-                .with()
-                .when()
-                .log().all()
-                .get(wishListUrl + wishListUrl);
     }
 
     public Response addItemToWishList() {
@@ -62,53 +52,4 @@ public class ApiHelper {
                 .log().all()
                 .post(addToWishlist);
     }
-
-//    public Response getSingleUserByNum(int userId) {
-//        return given()
-//                .spec(spec)
-//                .with()
-//                .when()
-//                .log().all()
-//                .get(singleUserUrl + "/" + userId);
-//    }
-//
-//    public Response createUser(String name, String job) {
-//        String requestBody = "{\n" +
-//                "\"name\": \"" + name + "\",\n" +
-//                "\"job\": \"" + job + "\"" +
-//                "\n}";
-//        return given()
-//                .spec(spec)
-//                .with()
-//                .body(requestBody)
-//                .when()
-//                .log().all()
-//                .post(singleUserUrl)
-//                ;
-//    }
-//
-//    public Response updateUser(String name, String job, String userId) {
-//        String requestBody = "{\n" +
-//                "\"name\": \"" + name + "\",\n" +
-//                "\"job\": \"" + job + "\"" +
-//                "\n}";
-//        return given()
-//                .spec(spec)
-//                .with()
-//                .body(requestBody)
-//                .when()
-//                .log().all()
-//                .post(singleUserUrl + "/" + userId)
-//                ;
-//    }
-//
-//    public Response deleteUser(String userId) {
-//        return given()
-//                .spec(spec)
-//                .with()
-//                .when()
-//                .log().all()
-//                .delete(singleUserUrl + "/" + userId)
-//                ;
-//    }
 }
