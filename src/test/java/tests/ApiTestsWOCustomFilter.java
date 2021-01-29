@@ -27,13 +27,14 @@ public class ApiTestsWOCustomFilter {
 
     @Test
     public void singleUserNotFoundTest() {
-        Assertions.assertEquals(
-                "404", String.valueOf(apiHelper.getSingleUserByNum(500).statusCode()));
+        String statusCode = String.valueOf(apiHelper.getSingleUserByNum(500).statusCode());
+        Assertions.assertEquals("404", statusCode);
     }
 
     @Test
     public void registerUserTest() {
-        String userName = "testUserName", userJob = "testUserJob";
+        String userName = "testUserName";
+        String userJob = "testUserJob";
         Response response = apiHelper.createUser(userName, userJob);
         Assertions.assertEquals(201, response.statusCode());
         Assertions.assertTrue(response.asString().contains(userName));
@@ -43,7 +44,8 @@ public class ApiTestsWOCustomFilter {
     @Test
     public void updateUserTest() {
         String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
-        String updatedName = "updatedName", updatedJob = "updatedJob";
+        String updatedName = "updatedName";
+        String updatedJob = "updatedJob";
         Response response = apiHelper.updateUser(updatedName, updatedJob, userId);
         Assertions.assertEquals(201, response.statusCode());
         Assertions.assertTrue(response.asString().contains(updatedName));
@@ -54,7 +56,7 @@ public class ApiTestsWOCustomFilter {
     public void deleteUserTest() {
         String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
         Assertions.assertEquals(204, apiHelper.deleteUser(userId).getStatusCode());
-        Assertions.assertEquals(
-                "404", String.valueOf(apiHelper.getSingleUserByNum(500).statusCode()));
+        String statusCode = String.valueOf(apiHelper.getSingleUserByNum(500).statusCode());
+        Assertions.assertEquals("404", statusCode);
     }
 }
