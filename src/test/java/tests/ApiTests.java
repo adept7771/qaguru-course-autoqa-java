@@ -11,15 +11,15 @@ public class ApiTests {
     @Test
     public void getUsersTest() {
         Response response = apiHelper.getListOfUsersByPageNum(1);
-        String code = String.valueOf(response.statusCode());
-        Assertions.assertEquals("200", code);
+        int code = response.statusCode();
+        Assertions.assertEquals(200, code);
         Assertions.assertTrue(response.body().asString().contains("\"page\":1"));
     }
 
     @Test
     public void singleUserNotFoundTest() {
-        String statusCode = String.valueOf(apiHelper.getSingleUserByNum(500).statusCode());
-        Assertions.assertEquals("404", statusCode);
+        int statusCode = apiHelper.getSingleUserByNum(500).statusCode();
+        Assertions.assertEquals(404, statusCode);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ApiTests {
         String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
         int statusCode = apiHelper.deleteUser(userId).getStatusCode();
         Assertions.assertEquals(204, statusCode);
-        String actualCode = String.valueOf(apiHelper.getSingleUserByNum(500).statusCode());
-        Assertions.assertEquals("404", actualCode);
+        int actualCode = apiHelper.getSingleUserByNum(500).statusCode();
+        Assertions.assertEquals(404, actualCode);
     }
 }
