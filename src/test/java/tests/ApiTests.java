@@ -24,7 +24,8 @@ public class ApiTests {
 
     @Test
     public void registerUserTest() {
-        String userName = "testUserName", userJob = "testUserJob";
+        String userName = "testUserName";
+        String userJob = "testUserJob";
         Response response = apiHelper.createUser(userName, userJob);
         Assertions.assertEquals(201, response.statusCode());
         Assertions.assertTrue(response.asString().contains(userName));
@@ -34,7 +35,8 @@ public class ApiTests {
     @Test
     public void updateUserTest() {
         String userId = apiHelper.createUser("userName", "userJob").then().extract().path("id");
-        String updatedName = "updatedName", updatedJob = "updatedJob";
+        String updatedName = "updatedName";
+        String updatedJob = "updatedJob";
         Response response = apiHelper.updateUser(updatedName, updatedJob, userId);
         Assertions.assertEquals(201, response.statusCode());
         Assertions.assertTrue(response.asString().contains(updatedName));
