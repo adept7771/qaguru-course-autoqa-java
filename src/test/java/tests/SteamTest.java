@@ -1,14 +1,14 @@
-package project;
+package tests;
 
 import helpers.TestConfigurator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import project.steps.AuthorisationSteps;
-import project.steps.CartSteps;
-import project.steps.NavigationSteps;
-import project.steps.SearchSteps;
+import testSteps.AuthorisationSteps;
+import testSteps.CartSteps;
+import testSteps.NavigationSteps;
+import testSteps.SearchSteps;
 
 public class SteamTest extends TestConfigurator {
 

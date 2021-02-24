@@ -1,4 +1,4 @@
-package project.steps;
+package testSteps;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;

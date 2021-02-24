@@ -1,11 +1,14 @@
 package helpers;
 
 import com.codeborne.selenide.Configuration;
+import helpers.additionalClasses.Browser;
+import helpers.additionalClasses.SelenoidInstance;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import properties.TestsProperties;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
@@ -19,14 +22,44 @@ public class TestConfigurator {
                 .savePageSource(true));
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
 
+        if (TestsProperties.runViaSelenoid || "true".equals(System.getProperty("runViaSelenoid"))) {
+            if (TestsProperties.selenoidEnableVideo || System.getProperty("selenoidEnableVideo").equals("true")) {
+                capabilities.setCapability("enableVideo", true);
+                capabilities.setCapability("videoFrameRate", 24);
+            }
+            if (TestsProperties.selenoidEnableVNC || System.getProperty("selenoidEnableVNC").equals("true")) {
+                capabilities.setCapability("enableVNC", true);
+            }
+            if (TestsProperties.selenoidInstance.equals(SelenoidInstance.localMachine)
+                    || System.getProperty("selenoidInstance").equals(SelenoidInstance.localMachine.name())) {
+
+                Configuration.remote = SelenoidInstance.localMachine.val;
+
+            } else if (TestsProperties.selenoidInstance.equals(SelenoidInstance.qaGuruSchool)
+                    || System.getProperty("selenoidInstance").equals(SelenoidInstance.qaGuruSchool.name())) {
+
+                Configuration.remote = SelenoidInstance.qaGuruSchool.val;
+            }
+        }
         Configuration.browserCapabilities = capabilities;
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud:4444/wd/hub/";
-        //Configuration.remote = "http://localhost:4444/wd/hub/";
-        Configuration.startMaximized = true;
-        Configuration.timeout = 6000;
+
+        if(System.getProperty("browser") != null){
+            Configuration.browser = System.getProperty("browser");
+        }
+        else {
+            Configuration.browser = TestsProperties.browser.name();
+        }
+
+        if("true".equals(System.getProperty("startMaximized")) || TestsProperties.startMaximized){
+            Configuration.startMaximized = TestsProperties.startMaximized;
+        }
+        if(System.getProperty("selenideWaitTimeout") != null){
+            Configuration.timeout = Integer.parseInt(System.getProperty("selenideWaitTimeout"));
+        }
+        else {
+            Configuration.timeout = TestsProperties.selenideWaitTimeout;
+        }
     }
 
     @AfterEach
