@@ -14,6 +14,7 @@ public class SteamTest extends TestConfigurator {
 
     final String owner = "Dmitry Potapov";
     final String url = "https://store.steampowered.com/";
+    final String projectName = "Steam";
     final NavigationSteps navigationSteps = new NavigationSteps();
     final SearchSteps searchSteps = new SearchSteps();
     final CartSteps cartSteps = new CartSteps();
@@ -21,9 +22,9 @@ public class SteamTest extends TestConfigurator {
 
     @Test
     @DisplayName("Проверить, что стим может быть установлен")
-    @Feature("Issues")
-    @Story("Навигация по магазину")
-    @Link(url = url, name = "Проверка функциональности магазина")
+    @Feature("Navigation feature")
+    @Story("Navigation links story")
+    @Link(url = url, name = projectName)
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void steamCanBeInstalledTest() {
@@ -34,9 +35,9 @@ public class SteamTest extends TestConfigurator {
 
     @Test
     @DisplayName("Поиск выдает хотя бы 1 совпадение искомого запроса")
-    @Feature("Issues")
-    @Story("Поиск по магазину")
-    @Link(url = url, name = "Проверка функциональности магазина")
+    @Feature("Search feature")
+    @Story("Navigation links story")
+    @Link(url = url, name = projectName)
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void searchGameTest() {
@@ -48,9 +49,9 @@ public class SteamTest extends TestConfigurator {
 
     @Test
     @DisplayName("Все языки в выпадающем списке уникальны")
-    @Feature("Issues")
-    @Story("Навигация по магазину")
-    @Link(url = url, name = "Проверка функциональности магазина")
+    @Feature("Navigation feature")
+    @Story("Personalisation story")
+    @Link(url = url, name = projectName)
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void checkAllLanguagesIsUniqueTest() {
@@ -61,9 +62,9 @@ public class SteamTest extends TestConfigurator {
 
     @Test
     @DisplayName("Счетчик товаров в корзине изменяется")
-    @Feature("Issues")
-    @Story("Проверка корзины")
-    @Link(url = url, name = "Проверка функциональности магазина")
+    @Feature("Cart feature")
+    @Story("Buying story")
+    @Link(url = url, name = projectName)
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void checkCartCounterTest() {
@@ -76,9 +77,9 @@ public class SteamTest extends TestConfigurator {
 
     @Test
     @DisplayName("Вход с не корректными регистрационными данными")
-    @Feature("Issues")
-    @Story("Работа логина")
-    @Link(url = url, name = "Проверка функциональности магазина")
+    @Feature("Login feature")
+    @Story("Login from web story")
+    @Link(url = url, name = projectName)
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void incorrectSignInTest() {
@@ -90,9 +91,8 @@ public class SteamTest extends TestConfigurator {
 
     @Test
     @DisplayName("Тест, который всегда падает")
-    @Feature("Issues")
-    @Story("Работа логина")
-    @Link(url = url, name = "Проверка функциональности магазина")
+    @Feature("Always fall feature")
+    @Link(url = url, name = projectName)
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void alwaysFallTest() {
