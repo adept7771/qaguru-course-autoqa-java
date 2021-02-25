@@ -11,7 +11,7 @@ public class Props {
     public static boolean selenoidEnableVideo = true;
     public static boolean selenoidEnableVNC = true;
 
-    public static boolean startMaximized = true; // start browser maximised
+    public static boolean startMaximized = false; // start browser maximised
     public static int selenideWaitTimeout = 6000; // time to wait elements by Selenide
     public static Browser browser = Browser.CHROME; // Browser to start tests with
 }
