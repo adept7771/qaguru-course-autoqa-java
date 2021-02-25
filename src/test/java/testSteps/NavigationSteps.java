@@ -12,27 +12,27 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class NavigationSteps {
 
-    @Step("Открываем главную страницу стима")
+    @Step("Open main page")
     public void openStartPage() {
         open("https://store.steampowered.com/");
     }
 
-    @Step("Перейти в Установить Steam")
+    @Step("Go to install Steam")
     public void installSteam() {
         $x("//a[contains(text(), 'Install Steam')]").click();
     }
 
-    @Step("Проверка, что ссылка на скачивание клиента присутсвует на странице")
+    @Step("Check that download link is appeared")
     public void checkSteamCanBeInstalled() {
         $x("//a[@class='about_install_steam_link']").shouldBe(Condition.appears);
     }
 
-    @Step("Переход в меню выбора языка")
+    @Step("Enter language menu")
     public void languagesMenuEnter() {
         $x("//span[@id='language_pulldown']").click();
     }
 
-    @Step("Проверка, что все языки в списке уникальны")
+    @Step("Check all languages is unique")
     public void languageMenuUniqueCheck() {
         $x("//a[@class='popup_menu_item tight']").shouldBe(Condition.visible);
         ElementsCollection elementsCollection = $$x("//a[@class='popup_menu_item tight']");

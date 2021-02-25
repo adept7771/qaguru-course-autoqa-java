@@ -9,12 +9,12 @@ import java.util.Locale;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SearchSteps {
-    @Step("Ввести в поиск искомую фразу")
+    @Step("Enter in search input phrase")
     public void searchInSearchInput(String phraseToSearch) {
         $x("//input[@id='store_nav_search_term']").val(phraseToSearch).pressEnter();
     }
 
-    @Step("Проверить поисковую выдачу хотя бы на 1 совпадение")
+    @Step("Check search results for at leas one match")
     public void checkSearchResultsForOneMatch(String phraseToSearch) {
         Configuration.timeout = 10000;
         for (SelenideElement selenideElement : $$x("//span[@class='title']")) {

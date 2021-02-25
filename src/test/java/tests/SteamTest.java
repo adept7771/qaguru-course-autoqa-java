@@ -21,7 +21,8 @@ public class SteamTest extends TestConfigurator {
     final AuthorisationSteps authorisationSteps = new AuthorisationSteps();
 
     @Test
-    @DisplayName("Проверить, что стим может быть установлен")
+    @AllureId("1743")
+    @DisplayName("Check Steam can be installed")
     @Feature("Navigation feature")
     @Story("Navigation links story")
     @Link(url = url, name = projectName)
@@ -34,7 +35,8 @@ public class SteamTest extends TestConfigurator {
     }
 
     @Test
-    @DisplayName("Поиск выдает хотя бы 1 совпадение искомого запроса")
+    @AllureId("1744")
+    @DisplayName("Search results match one item at least")
     @Feature("Search feature")
     @Story("Navigation links story")
     @Link(url = url, name = projectName)
@@ -48,7 +50,8 @@ public class SteamTest extends TestConfigurator {
     }
 
     @Test
-    @DisplayName("Все языки в выпадающем списке уникальны")
+    @AllureId("1742")
+    @DisplayName("All languages is unique")
     @Feature("Navigation feature")
     @Story("Personalisation story")
     @Link(url = url, name = projectName)
@@ -61,7 +64,8 @@ public class SteamTest extends TestConfigurator {
     }
 
     @Test
-    @DisplayName("Счетчик товаров в корзине изменяется")
+    @AllureId("1741")
+    @DisplayName("Items counter in cart is changing")
     @Feature("Cart feature")
     @Story("Buying story")
     @Link(url = url, name = projectName)
@@ -76,7 +80,8 @@ public class SteamTest extends TestConfigurator {
     }
 
     @Test
-    @DisplayName("Вход с не корректными регистрационными данными")
+    @AllureId("1739")
+    @DisplayName("Enter with incorrect login data")
     @Feature("Login feature")
     @Story("Login from web story")
     @Link(url = url, name = projectName)
@@ -90,7 +95,8 @@ public class SteamTest extends TestConfigurator {
     }
 
     @Test
-    @DisplayName("Тест, который всегда падает")
+    @AllureId("1740")
+    @DisplayName("Test which falls all the time")
     @Feature("Always fall feature")
     @Link(url = url, name = projectName)
     @Owner(owner)
