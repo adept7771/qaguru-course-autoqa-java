@@ -13,5 +13,5 @@ public class TestsProperties {
 
     public static boolean startMaximized = true; // start browser maximised
     public static int selenideWaitTimeout = 6000; // time to wait elements by Selenide
-    public static Browser browser = Browser.Chrome; // Browser to start tests with
+    public static Browser browser = Browser.Opera; // Browser to start tests with
 }
