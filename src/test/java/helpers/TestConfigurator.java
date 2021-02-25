@@ -32,12 +32,12 @@ public class TestConfigurator {
                 capabilities.setCapability("enableVNC", true);
             }
             if (TestsProperties.selenoidInstance.equals(SelenoidInstance.localMachine)
-                    || System.getProperty("selenoidInstance").equals(SelenoidInstance.localMachine.name())) {
+                    || SelenoidInstance.localMachine.name().equals(System.getProperty("selenoidInstance"))){
 
                 Configuration.remote = SelenoidInstance.localMachine.val;
 
             } else if (TestsProperties.selenoidInstance.equals(SelenoidInstance.qaGuruSchool)
-                    || System.getProperty("selenoidInstance").equals(SelenoidInstance.qaGuruSchool.name())) {
+                    || SelenoidInstance.qaGuruSchool.name().equals(System.getProperty("selenoidInstance"))) {
 
                 Configuration.remote = SelenoidInstance.qaGuruSchool.val;
             }
