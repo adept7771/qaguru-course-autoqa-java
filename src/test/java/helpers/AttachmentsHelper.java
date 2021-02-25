@@ -40,7 +40,7 @@ public class AttachmentsHelper {
 
     public static String getVideoUrl() {
         //return "https://" + System.getProperty("remote.browser.url") + "/video/" + getSessionId() + ".mp4";
-        return Props.selenoidInstance.val + "/video/" + getSessionId() + ".mp4";
+        return Props.selenoidInstance.val.replace("/wd/hub/", "/video/") + getSessionId() + ".mp4";
     }
 
     public static String getSessionId() {
