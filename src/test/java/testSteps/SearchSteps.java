@@ -17,7 +17,7 @@ public class SearchSteps {
     @Step("Проверить поисковую выдачу хотя бы на 1 совпадение")
     public void checkSearchResultsForOneMatch(String phraseToSearch) {
         Configuration.timeout = 10000;
-        for (SelenideElement selenideElement : $$x("//span[@class=\"title\"]")) {
+        for (SelenideElement selenideElement : $$x("//span[@class='title']")) {
             if (selenideElement.getText().toLowerCase(Locale.ROOT)
                     .contains(phraseToSearch.toLowerCase(Locale.ROOT))) {
                 Assertions.assertTrue(true);

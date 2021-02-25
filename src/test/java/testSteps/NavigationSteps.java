@@ -24,7 +24,7 @@ public class NavigationSteps {
 
     @Step("Проверка, что ссылка на скачивание клиента присутсвует на странице")
     public void checkSteamCanBeInstalled() {
-        $x("//a[@class=\"about_install_steam_link\"]").shouldBe(Condition.appears);
+        $x("//a[@class='about_install_steam_link']").shouldBe(Condition.appears);
     }
 
     @Step("Переход в меню выбора языка")

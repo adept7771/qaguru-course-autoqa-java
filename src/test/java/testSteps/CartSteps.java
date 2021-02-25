@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class CartSteps {
     @Step("Добавляем первый товар на странице результатов в корзину")
     public void addFirstItemToCart() {
-        $x("//span[@class=\"title\"]").click();
+        $x("//span[@class='title']").click();
         $x("//div[@class='btn_addtocart']").click();
     }
 
