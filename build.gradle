@@ -47,7 +47,13 @@ tasks.withType(JavaCompile) {
 tasks.withType(Test) {
     systemProperties += System.properties
 
-    useJUnitPlatform()
+    systemProperties += [
+            'junit.jupiter.execution.parallel.enabled'                 : true,
+            'junit.jupiter.execution.parallel.mode.default'            : 'concurrent',
+            'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
+            'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
+            'junit.jupiter.execution.parallel.config.fixed.parallelism': 3
+    ]
 
     testLogging {
         lifecycle {
@@ -56,4 +62,6 @@ tasks.withType(Test) {
             exceptionFormat "short"
         }
     }
+
+    useJUnitPlatform()
 }
