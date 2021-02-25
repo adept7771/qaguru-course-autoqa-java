@@ -48,7 +48,7 @@ public class TestConfigurator {
 //            Configuration.remote = System.getProperty("selenoidInstance");
 //        }
 
-
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud:4444/wd/hub/";
 
         Configuration.browserCapabilities = capabilities;
 
