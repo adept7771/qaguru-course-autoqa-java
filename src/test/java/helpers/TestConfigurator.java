@@ -54,11 +54,13 @@ public class TestConfigurator {
         } else {
             Configuration.browser = System.getProperty("browser");
         }
+        System.out.println("BROWSER SYS VARIABLE: " + System.getProperty("browser"));
         if (System.getProperty("startMaximized") == null) {
             Configuration.startMaximized = Props.startMaximized;
         } else {
             Configuration.startMaximized = Boolean.parseBoolean(System.getProperty("startMaximized"));
         }
+        System.out.println("START MAX VARIABLE: " + System.getProperty("startMaximized"));
         if (System.getProperty("selenideWaitTimeout") == null) {
             Configuration.timeout = Props.selenideWaitTimeout;
         } else {
