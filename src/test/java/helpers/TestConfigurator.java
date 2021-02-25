@@ -23,32 +23,29 @@ public class TestConfigurator {
     public void setup() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true)
                 .savePageSource(true));
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-//        if (System.getProperty("runViaSelenoid") == null) {
-//            System.setProperty("runViaSelenoid", String.valueOf(Props.runViaSelenoid));
-//        }
-//        if (System.getProperty("selenoidEnableVideo") == null) {
-//            System.setProperty("selenoidEnableVideo", String.valueOf(Props.selenoidEnableVideo));
-//        }
-//        if (System.getProperty("selenoidEnableVNC") == null) {
-//            System.setProperty("selenoidEnableVNC", String.valueOf(Props.selenoidEnableVNC));
-//        }
-//        if (System.getProperty("selenoidInstance") == null) {
-//            System.setProperty("selenoidInstance", Props.selenoidInstance.val);
-//        }
-//
-//        if (System.getProperty("runViaSelenoid").equals("true")) {
-//            capabilities.setCapability("enableVideo",
-//                    Boolean.parseBoolean(System.getProperty("selenoidEnableVideo")));
-//            capabilities.setCapability("videoFrameRate", 24);
-//            capabilities.setCapability("enableVNC",
-//                    Boolean.parseBoolean(System.getProperty("selenoidEnableVNC")));
-//            Configuration.remote = System.getProperty("selenoidInstance");
-//        }
+        if (System.getProperty("runViaSelenoid") == null) {
+            System.setProperty("runViaSelenoid", String.valueOf(Props.runViaSelenoid));
+        }
+        if (System.getProperty("selenoidEnableVideo") == null) {
+            System.setProperty("selenoidEnableVideo", String.valueOf(Props.selenoidEnableVideo));
+        }
+        if (System.getProperty("selenoidEnableVNC") == null) {
+            System.setProperty("selenoidEnableVNC", String.valueOf(Props.selenoidEnableVNC));
+        }
+        if (System.getProperty("selenoidInstance") == null) {
+            System.setProperty("selenoidInstance", Props.selenoidInstance.val);
+        }
 
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud:4444/wd/hub/";
+        if (System.getProperty("runViaSelenoid").equals("true")) {
+            capabilities.setCapability("enableVideo",
+                    Boolean.parseBoolean(System.getProperty("selenoidEnableVideo")));
+            capabilities.setCapability("videoFrameRate", 24);
+            capabilities.setCapability("enableVNC",
+                    Boolean.parseBoolean(System.getProperty("selenoidEnableVNC")));
+            Configuration.remote = System.getProperty("selenoidInstance");
+        }
 
         Configuration.browserCapabilities = capabilities;
 
@@ -67,6 +64,7 @@ public class TestConfigurator {
         } else {
             Configuration.timeout = Integer.parseInt(System.getProperty("selenideWaitTimeout"));
         }
+
     }
 
     @AfterEach
