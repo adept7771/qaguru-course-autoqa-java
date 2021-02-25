@@ -49,14 +49,12 @@ public class TestConfigurator {
 
         Configuration.browserCapabilities = capabilities;
 
-        System.out.println("BROWSER SYS VARIABLE: " + System.getProperty("browser"));
         if (System.getProperty("browser") == null) {
             Configuration.browser = Props.browser.name();
         } else {
             Configuration.browser = System.getProperty("browser");
         }
 
-        System.out.println("START MAX VARIABLE: " + System.getProperty("startMaximized"));
         if (System.getProperty("startMaximized") == null) {
             Configuration.startMaximized = Props.startMaximized;
         } else {
