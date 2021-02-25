@@ -5,6 +5,7 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import properties.Props;
 
 import java.nio.charset.StandardCharsets;
 
@@ -38,7 +39,8 @@ public class AttachmentsHelper {
     }
 
     public static String getVideoUrl() {
-        return "https://" + System.getProperty("remote.browser.url") + "/video/" + getSessionId() + ".mp4";
+        //return "https://" + System.getProperty("remote.browser.url") + "/video/" + getSessionId() + ".mp4";
+        return Props.selenoidInstance.val + "/video/" + getSessionId() + ".mp4";
     }
 
     public static String getSessionId() {
