@@ -35,7 +35,7 @@ dependencies {
     testImplementation "io.qameta.allure:allure-selenide:${allureVersion}"
     testImplementation "com.github.javafaker:javafaker:1.0.2"
     testImplementation "ch.qos.logback:logback-classic:1.2.3"
-
+    testImplementation "io.qameta.allure:allure-ee-junit-platform:3.28.2"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
