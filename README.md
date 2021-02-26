@@ -30,31 +30,30 @@ move all locators in page-object files.
 Selenoid run:
 
 ![selenoid screenshot](src/test/resources/readmeImages/selenoid1.png)
-![selenoid screenshot](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.43.10.png)
+![selenoid screenshot]('src/test/resources/readmeImages/selenoid2.png')
 
 Allure free version:
 
-![allure free](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.43.28.png)
-![allure free](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.43.46.png)
-![allure free](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.44.21.png)
+![allure free](src/test/resources/readmeImages/allurefree1.png)
+![allure free](src/test/resources/readmeImages/allurefree2.png)
+![allure free](src/test/resources/readmeImages/allurefree3.png)
 
 Jenkins run:
 
-![jenkins](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.45.08.png)
-![jenkins](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.45.17.png)
+![jenkins](src/test/resources/readmeImages/jenkins1.png)
+![jenkins](src/test/resources/readmeImages/jenkins2.png)
 
 Allure enterprise edition (Allure test ops):
 
-![allure test ops](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.45.39.png)
-![allure test ops](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.45.55.png)
-![allure test ops](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.46.06.png)
-![allure test ops](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.46.11.png)
-![allure test ops](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.45.08.png)
+![allure test ops](src/test/resources/readmeImages/alluretestops1.png)
+![allure test ops](src/test/resources/readmeImages/alluretestops2.png)
+![allure test ops](src/test/resources/readmeImages/alluretestops3.png)
+![allure test ops](src/test/resources/readmeImages/alluretestops4.png)
 
 Telegram piechart reporting:
 
-![telegram](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.46.41.png)
+![telegram](src/test/resources/readmeImages/telegram.png)
 
 Jira integration:
 
-![jira](src/test/resources/readmeImages/Screenshot 2021-02-26 at 13.47.35.png)
+![jira](src/test/resources/readmeImages/jira.png)
