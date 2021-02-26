@@ -30,7 +30,7 @@ move all locators in page-object files.
 Selenoid run:
 
 ![selenoid screenshot](src/test/resources/readmeImages/selenoid1.png)
-![selenoid screenshot]('src/test/resources/readmeImages/selenoid2.png')
+![selenoid screenshot](src/test/resources/readmeImages/selenoid2.png)
 
 Allure free version:
 
