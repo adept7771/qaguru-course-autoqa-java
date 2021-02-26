@@ -32,6 +32,10 @@ Selenoid run:
 ![selenoid screenshot](src/test/resources/readmeImages/selenoid1.png)
 ![selenoid screenshot](src/test/resources/readmeImages/selenoid2.png)
 
+Multithreading (also works local without selenoid):
+
+![selenoid screenshot](src/test/resources/readmeImages/selenoid3.png)
+
 Allure free version:
 
 ![allure free](src/test/resources/readmeImages/allurefree1.png)
