@@ -6,7 +6,7 @@ import helpers.SelenoidInstance;
 public class Props {
 
     public static boolean runViaSelenoid = true; // run tests in selenoid
-    public static SelenoidInstance selenoidInstance = SelenoidInstance.localMachine;
+    public static SelenoidInstance selenoidInstance = SelenoidInstance.qaGuruSchool;
     // ^ address of selenoid machine
     public static boolean selenoidEnableVideo = true;
     public static boolean selenoidEnableVNC = true;
