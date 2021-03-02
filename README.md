@@ -5,11 +5,11 @@ branch contains completed project which you can use for your automation purposes
 
 Technologies involved:
 
-- java
-- gradle
+- Java
+- Gradle
+- Junit5 + multi-threading runs
 - Selenide (Automation framework based on Selenium)
 - Selenoid (Virtualization system based on the docker)
-- Junit5 + multi-threading runs
 - Allure (+Allure test ops) test report system.
 - Jira integration / Jenkins integration
 - Telegram piechart reporting library integration

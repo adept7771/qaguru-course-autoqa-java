@@ -1,4 +1,4 @@
-package helpers.additionalClasses;
+package helpers;
 
 public enum SelenoidInstance {
     localMachine("http://localhost:4444/wd/hub/"),

@@ -10,7 +10,7 @@ import testSteps.CartSteps;
 import testSteps.NavigationSteps;
 import testSteps.SearchSteps;
 
-public class SteamTest extends TestConfigurator {
+public class SteamTests extends TestConfigurator {
 
     final String owner = "Dmitry Potapov";
     final String url = "https://store.steampowered.com/";
@@ -80,7 +80,6 @@ public class SteamTest extends TestConfigurator {
     }
 
     @Test
-
     @AllureId("1739")
     @DisplayName("Enter with incorrect login data")
     @Feature("Login feature")
@@ -103,6 +102,6 @@ public class SteamTest extends TestConfigurator {
     @Owner(owner)
     @Severity(SeverityLevel.CRITICAL)
     void alwaysFallTest() {
-        Assertions.fail("Этот тест всегда падает и должен просто существовать в отчете.");
+        Assertions.fail("This test will fall all the time and need to exist to demonstrate error");
     }
 }
