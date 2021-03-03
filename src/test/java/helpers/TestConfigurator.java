@@ -25,32 +25,27 @@ public class TestConfigurator {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        if (System.getProperty("runViaSelenoid",
-                String.valueOf(Props.runViaSelenoid))
-                .equals("true")) {
+        String runViaSelenoid = System.getProperty("runViaSelenoid", Props.runViaSelenoid);
+        Boolean selenoidEnableVideo = Boolean.valueOf(System.getProperty("selenoidEnableVideo", Props.selenoidEnableVideo));
+        Boolean selenoidEnableVNC = Boolean.valueOf(System.getProperty("selenoidEnableVNC", Props.selenoidEnableVNC));
+        String selenoidInstance = Props.selenoidInstance.val;
 
-            capabilities.setCapability("enableVideo", Boolean.valueOf(
-                    System.getProperty("selenoidEnableVideo",
-                            String.valueOf(Props.selenoidEnableVideo))));
-
+        if (runViaSelenoid.equals("true")) {
+            capabilities.setCapability("enableVideo", selenoidEnableVideo);
             capabilities.setCapability("videoFrameRate", 24);
+            capabilities.setCapability("enableVNC", selenoidEnableVNC);
 
-            capabilities.setCapability("enableVNC", Boolean.valueOf(
-                    System.getProperty("selenoidEnableVNC",
-                            String.valueOf(Props.selenoidEnableVNC))));
-
-            Configuration.remote = System.getProperty("selenoidInstance", Props.selenoidInstance.val);
+            Configuration.remote = System.getProperty("selenoidInstance", selenoidInstance);
         }
 
         Configuration.browserCapabilities = capabilities;
-
         Configuration.browser = System.getProperty("browser", Props.browser);
 
-        Configuration.startMaximized = Boolean.parseBoolean(
-                System.getProperty("startMaximized", String.valueOf(Props.startMaximized)));
+        boolean startMaximized = Boolean.parseBoolean(System.getProperty("startMaximized", Props.startMaximized));
+        long timeout = Long.parseLong(System.getProperty("selenideWaitTimeout", Props.selenideWaitTimeout));
 
-        Configuration.timeout = Long.parseLong(
-                System.getProperty("selenideWaitTimeout", String.valueOf(Props.selenideWaitTimeout)));
+        Configuration.startMaximized = startMaximized;
+        Configuration.timeout = timeout;
     }
 
     @AfterEach

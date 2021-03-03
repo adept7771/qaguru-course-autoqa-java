@@ -39,9 +39,8 @@ public class AttachmentsHelper {
     }
 
     public static String getVideoUrl() {
-        String videoUrl = Props.selenoidInstance.val.replace
-                (":4444/wd/hub/", "/video/") + getSessionId() + ".mp4";
-        videoUrl = videoUrl.replace("user1:1234@", "");
+        String videoUrl = System.getProperty("webVideoStorage", Props.webVideoStorage.val)
+                + getSessionId() + ".mp4";
         return videoUrl;
     }
 
