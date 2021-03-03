@@ -8,7 +8,7 @@ public class Props {
 
     public static String runViaSelenoid = "true"; // run tests in selenoid
     public static SelenoidInstance selenoidInstance = SelenoidInstance.qaGuruSelenoid; // address of selenoid machine
-    public static WebVideoStorage webVideoStorage = WebVideoStorage.localStorage; // video storage for selenoid
+    public static WebVideoStorage webVideoStorage = WebVideoStorage.qaGuruStorage; // video storage for selenoid
 
     public static String selenoidEnableVideo = "true";
     public static String selenoidEnableVNC = "true";
