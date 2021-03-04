@@ -20,15 +20,14 @@ public class TestConfigurator {
 
     @BeforeEach
     public void setup() {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true)
-                .savePageSource(true));
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         String runViaSelenoid = System.getProperty("runViaSelenoid", Props.runViaSelenoid);
         Boolean selenoidEnableVideo = Boolean.valueOf(System.getProperty("selenoidEnableVideo", Props.selenoidEnableVideo));
         Boolean selenoidEnableVNC = Boolean.valueOf(System.getProperty("selenoidEnableVNC", Props.selenoidEnableVNC));
         String selenoidInstance = Props.selenoidInstance.val;
+        boolean startMaximized = Boolean.parseBoolean(System.getProperty("startMaximized", Props.startMaximized));
+        long timeout = Long.parseLong(System.getProperty("selenideWaitTimeout", Props.selenideWaitTimeout));
 
         if (runViaSelenoid.equals("true")) {
             capabilities.setCapability("enableVideo", selenoidEnableVideo);
@@ -40,12 +39,11 @@ public class TestConfigurator {
 
         Configuration.browserCapabilities = capabilities;
         Configuration.browser = System.getProperty("browser", Props.browser);
-
-        boolean startMaximized = Boolean.parseBoolean(System.getProperty("startMaximized", Props.startMaximized));
-        long timeout = Long.parseLong(System.getProperty("selenideWaitTimeout", Props.selenideWaitTimeout));
-
         Configuration.startMaximized = startMaximized;
         Configuration.timeout = timeout;
+
+        addListener("AllureSelenide", new AllureSelenide().screenshots(true)
+                .savePageSource(true));
     }
 
     @AfterEach
